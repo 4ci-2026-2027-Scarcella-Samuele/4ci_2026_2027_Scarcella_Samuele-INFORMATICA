@@ -1,0 +1,77 @@
+public class Car{
+    // variabili d'istanza
+    private double resa; // litri consumati per chilometro
+    private double carburante; // livello carburante nel serbatoio
+
+    public Car(){
+        // inizializza le variabili d'istanza
+        resa = 0.0;
+        carburante = 0.0;
+    }
+
+    public Car(double resa){
+        // Controllo che la resa sia positiva
+        if (resa > 0) {
+            this.resa = resa;
+        } else {
+            System.out.println("Errore: La resa dell'automobile deve essere maggiore di zero.");
+        this.resa = 0.0;
+        }
+        this.carburante = 0.0; // livello iniziale a zero
+    }
+
+    public double getResa(){
+        return resa;
+    }
+
+    public void setResa(double resa){
+        if (resa > 0) {
+            this.resa = resa;
+        } else {
+            System.out.println("Errore: La resa deve essere maggiore di zero.");
+        }
+    }
+
+    public double getGas(){
+        return carburante;
+    }
+
+    public void addGas(double quantita){
+        // Controllo che la quantità da aggiungere sia positiva
+        if (quantita > 0) {
+            this.carburante = this.carburante + quantita;
+            System.out.println("Rifornimento auto effettuato. Carburante attuale: " + this.carburante + " litri.");
+        } else {
+            System.out.println("Errore: La quantità di carburante da aggiungere deve essere maggiore di zero.");
+        }
+    }
+
+    public void drive(double km){
+        // Controllo che i chilometri siano positivi
+        if (km <= 0) {
+            System.out.println("Errore: I chilometri da percorrere devono essere maggiori di zero.");
+        }
+
+        // Calcola il carburante necessario per il viaggio
+        double carburanteNecessario = km * resa;
+
+        // Controllo se c'è abbastanza carburante nel serbatoio
+        if (this.carburante >= carburanteNecessario) {
+            this.carburante = this.carburante - carburanteNecessario;
+            System.out.println("Viaggio di " + km + " km completato con successo.");
+        }else {
+            // Se il carburante non basta, la macchina percorre solo i km possibili fino al punto di arresto
+            double kmPercorsi = this.carburante / resa;
+            this.carburante = 0.0;
+            System.out.println("Errore: Carburante insufficiente per completare il viaggio!");
+            System.out.println("L'automobile si è fermata dopo aver percorso " + kmPercorsi + " km.");
+        }
+    }
+
+    public String toString(){
+        String out = "";
+        out += "Resa dell'automobile (litri/km): " + this.resa;
+        out += "\n Carburante presente nel serbatoio: " + this.carburante + " litri";
+        return out;
+    }
+}

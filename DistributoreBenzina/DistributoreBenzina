@@ -1,0 +1,80 @@
+public class DistributoreBenzina{
+    // variabili d'istanza
+    private double deposito;
+    private double euroPerLitro;
+
+    public DistributoreBenzina(){
+        deposito = 0.0;
+        euroPerLitro = 0.0;
+    }
+
+    public DistributoreBenzina(double unPrezzoPerLitro){
+        // Controllo che il prezzo non sia negativo
+        if (unPrezzoPerLitro > 0) {
+            this.euroPerLitro = unPrezzoPerLitro;
+        } else {
+            System.out.println("Errore: Il prezzo per litro deve essere maggiore di zero.");
+            this.euroPerLitro = 0.0;
+        }
+        this.deposito = 0.0;
+    }
+
+    public double getDeposito(){
+        return deposito;
+    }
+
+    public double getEuroPerLitro(){
+        return euroPerLitro;
+    }
+
+    public void rifornisci(double unaQuantita){
+        // Controllo che la quantità da aggiungere sia positiva
+        if (unaQuantita > 0) {
+            this.deposito = this.deposito + unaQuantita;
+            System.out.println("Rifornimento deposito completato. Nuova quantità: " + this.deposito + " litri.");
+        } else {
+            System.out.println("Errore: La quantità di rifornimento deve essere maggiore di zero.");
+        }
+    }
+
+    public void vendi(double euro, Car unaAutomobile){
+        // Controllo sugli euro inseriti
+        if (euro <= 0) {
+            System.out.println("Errore: L'importo in euro deve essere maggiore di zero.");
+        }
+
+        // Controllo che il prezzo del litro sia valido
+        if (euroPerLitro <= 0) {
+            System.out.println("Errore: Impossibile vendere, prezzo del litro non valido.");
+        }
+
+        // Calcolo dei litri richiesti
+        double litriAcquistati = euro / euroPerLitro;
+
+        // Controllo se c'è abbastanza benzina nel deposito del distributore
+        if (litriAcquistati <= this.deposito) {
+            this.deposito = this.deposito - litriAcquistati;
+            unaAutomobile.addGas(litriAcquistati);
+            System.out.println("Vendita effettuata con successo: erogati " + litriAcquistati + " litri.");
+        } else {
+            System.out.println("Errore: Benzina insufficiente nel deposito del distributore! Disponibili solo " + this.deposito + " litri.");
+        }
+    }
+
+    public void aggiorna(double unPrezzoPerLitro){
+        // Controllo sul nuovo prezzo
+        if (unPrezzoPerLitro > 0) {
+            this.euroPerLitro = unPrezzoPerLitro;
+            System.out.println("Prezzo aggiornato correttamente a " + unPrezzoPerLitro + " €/litro.");
+        } else {
+            System.out.println("Errore: Il nuovo prezzo deve essere maggiore di zero.");
+        }
+    }
+
+    public String toString(){
+        String out = "";
+        out += "Benzina disponibile nel deposito: " + this.deposito + " litri";
+        out += "\n Prezzo della benzina: " + this.euroPerLitro + " €/litro";
+        return out;
+    }
+}

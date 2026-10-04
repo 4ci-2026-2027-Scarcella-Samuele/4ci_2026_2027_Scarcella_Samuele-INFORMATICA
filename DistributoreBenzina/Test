@@ -1,0 +1,69 @@
+impot java.util.*;
+
+public class Test_distributore{
+    public static void main(String [] args){
+        Scanner sc = new Scanner;
+
+        double prezzoLitro;
+        double resaAuto;
+        double quantitaRifornimento;
+        double euroSpesi;
+        double KmDaFare;
+
+        System.out.println("Inserire il prezzo della benzina al litro (€/l)");
+        prezzoLitro = sc.nextDouble();
+        sc.nextLine();
+
+        DistributoreBenzina distributore = new DistributoreBenzina(prezzoLitro);
+        
+        System.out.println("Inserire la quantità di benzina per rifornire il deposito (litri)");
+        quantitaRifornimento = sc.nextDouble();
+        sc.nextLine();
+
+        distributore.rifornisci(quantitaRifornimento);
+
+        System.out.println("\n--- STATO DISTRIBUTORE ---");
+        System.out.println(distributore.toString());
+
+        System.out.println("");
+
+        System.out.println("Inserire la resa dell'automobile (litri consumati per km, es. 0.05)");
+        resaAuto = sc.nextDouble();
+        sc.nextLine();
+
+        Car auto1 = new Car(resaAuto);
+
+        System.out.println("\n--- STATO AUTOMOBILE ---");
+        System.out.println(auto1.toString());
+
+        System.out.println("");
+
+        System.out.println("Inserire l'importo in euro per fare benzina all'automobile");
+        euroSpesi = sc.nextDouble();
+        sc.nextLine();
+
+        distributore.vendi(euroSpesi, auto1);
+
+        System.out.println("\n--- DOPO IL RIFORNIMENTO ---");
+        System.out.println(distributore.toString());
+        System.out.println(auto1.toString());
+        
+        System.out.println("");
+
+
+        System.out.println("Inserire i chilometri da percorrere con l'automobile");
+        kmDaFare = sc.nextDouble();
+        sc.nextLine();
+
+        auto1.drive(kmDaFare);
+
+        System.out.println("\n--- DOPO IL VIAGGIO ---");
+        System.out.println(auto1.toString());
+        System.out.println("");
+
+
+        System.out.println("Inserire il nuovo prezzo della benzina al litro");
+        prezzoLitro = sc.nextDouble();
+        sc.nextLine();
+    }
+}
